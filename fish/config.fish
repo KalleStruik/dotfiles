@@ -2,6 +2,8 @@ set --export SHELL /bin/fish
 set --export EDITOR "nvim"
 set -e fish_greeting
 
+set -U fish_user_paths /home/kalle/.gem/ruby/2.7.0/bin $fish_user_paths
+
 source "$HOME/.config/fish/abbreviations.fish"
 
 function playlist-dl

@@ -1,0 +1,177 @@
+[colors]
+transparent        = #00000000
+background         = #282a36
+background-current = #44475a
+foreground         = #f8f8f2
+cyan               = #5ba9bd
+green              = #209a4b
+orange             = #cf885c
+pink               = #ff79c6
+purple             = #7d53b9
+red                = #cc3333
+yellow             = #997700
+
+[bar/primary]
+monitor = ${env:MONITOR:DP-4}
+width = 100%
+height = 28
+
+background = ${colors.transparent}
+foregorund = ${colors.foreground}
+
+# No under/over line
+line-size = 0
+# Small border to pull it away from the green edges.
+border-size = 5
+border-bottom-size = 0
+border-color = ${colors.transparent}
+
+padding = 1
+
+module-margin-left = 1
+module-margin-right = 0
+
+font-0 = "Roboto Mono Nerd Font:pixelsize=12;2"
+
+tray-position = right
+tray-background = ${colors.background}
+
+modules-left = i3
+modules-center = mpd
+modules-right = memory pulseaudio du_root date
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.background}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-current}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-background = ${colors.background}
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.red}
+label-urgent-padding = 2
+
+
+[module/mpd]
+type = internal/mpd
+format-online = " <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next> "
+format-online-background = ${colors.background}
+format-online-prefix = "  "
+format-online-prefix-background = ${colors.purple}
+
+icon-prev = " 玲"
+icon-stop = " 栗"
+icon-play = " 契"
+icon-pause = " "
+icon-next = " 怜"
+
+label-song = " %artist% - %title% "
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "  "
+format-prefix-background = ${colors.red}
+format-background = ${colors.background}
+label = " %gb_used% "
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+format-volume-background = ${colors.background}
+format-volume-prefix = " 墳 "
+format-volume-prefix-background = ${colors.cyan}
+
+format-muted = <label-muted>
+format-muted-background = ${colors.background}
+format-muted-prefix = " 墳 "
+format-muted-prefix-background = ${colors.cyan}
+
+label-volume = " %percentage%% "
+
+label-muted = " Muted "
+
+
+[module/du_root]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = " %percentage_used%% "
+label-unmounted = "  "
+
+format-mounted = <label-mounted>
+format-mounted-background = ${colors.background}
+format-mounted-prefix = "  "
+format-mounted-prefix-background = ${colors.green}
+
+format-unmounted = <label-unmounted>
+format-unmounted-background = ${colors.background}
+format-unmounted-prefix = "  "
+format-unmounted-prefix-background = ${colors.green}
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = "%H:%M "
+time-alt = "%H:%M:%S "
+
+format-background = ${colors.background}
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+format-prefix-background = ${colors.yellow}
+
+label = %date% %time%
+
+
+; vim:ft=dosini
